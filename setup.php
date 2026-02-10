@@ -29,6 +29,10 @@
  --------------------------------------------------------------------------
 */
 
+use GlpiPlugin\Transferticketentity\Entity as TransferTicketEntityEntity;
+use GlpiPlugin\Transferticketentity\Profile as TransferTicketEntityProfile;
+use GlpiPlugin\Transferticketentity\Ticket as TransferTicketEntityTicket;
+
 define('TRANSFERTICKETENTITY_VERSION', '1.1.3');
 
 function plugin_init_transferticketentity()
@@ -36,9 +40,9 @@ function plugin_init_transferticketentity()
     global $PLUGIN_HOOKS;
 
     // Add a tab for profiles and tickets
-    Plugin::registerClass('PluginTransferticketentityProfile', ['addtabon' => 'Profile']);
-    Plugin::registerClass('PluginTransferticketentityTicket', ['addtabon' => 'Ticket']);
-    Plugin::registerClass('PluginTransferticketentityEntity', ['addtabon' => 'Entity']);
+    Plugin::registerClass(TransferTicketEntityProfile::class, ['addtabon' => 'Profile']);
+    Plugin::registerClass(TransferTicketEntityTicket::class, ['addtabon' => 'Ticket']);
+    Plugin::registerClass(TransferTicketEntityEntity::class, ['addtabon' => 'Entity']);
 
     $PLUGIN_HOOKS['csrf_compliant']['transferticketentity'] = true;
 }
@@ -53,35 +57,23 @@ function plugin_version_transferticketentity()
         'homepage'       => 'https://github.com/departement-maine-et-loire/',
         'requirements'   => [
             'glpi'   => [
-                'min' => '10.0'
-            ]
-        ]
+                'min' => '10.0',
+            ],
+        ],
     ];
 }
 
 function plugin_transferticketentity_check_prerequisites()
 {
-    $version = preg_replace('/^((\d+\.?)+).*$/', '$1', GLPI_VERSION);
-
-    if (version_compare($version, '10.0', '<')) {
-       echo "This plugin requires GLPI >= 10.0";
-       return false;
-    }
-
     return true;
 }
 
 function plugin_transferticketentity_check_config($verbose = false)
 {
-    if (true) {
-        return true;
-    }
-
     if ($verbose) {
-        echo "Installed, but not configured";
+        echo __s('Installed / not configured', 'transferticketentity');
     }
-
-    return false;
+    return true;
 }
 
 function plugin_transferticketentity_options()

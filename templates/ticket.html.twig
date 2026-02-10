@@ -1,0 +1,50 @@
+{% import 'components/form/fields_macros.html.twig' as fields %}
+
+{% if canedit %}
+    <form name="form"
+          action="{{ form_path }}"
+          method="post"
+          data-track-changes="true"
+          id="tte_form">
+        <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
+{% endif %}
+
+<div class="row">
+    {{ fields.hiddenField('ticket_id', item.fields['id'], '') }}
+    {{ fields.hiddenField('justification', '', '') }}
+    {{ fields.dropdownArrayField('entity_choice', null, entityDropdownValues, __("Select ticket entity to transfer", "transferticketentity"), {
+        'full_width': true,
+        'on_change': 'tteGetEntityGroups(this)'
+    }) }}
+    {{ fields.dropdownArrayField('group_choice', null, {}, __("Select the group to assign", "transferticketentity"), {
+        'add_field_attribs': {
+            'style': 'display: none;'
+        },
+        'full_width': true,
+        'display_emptychoice': true,
+        'emptylabel': __("None", "transferticketentity"),
+    }) }}
+
+
+
+</div>
+
+{% if canedit %}
+        <div class="card-footer mx-n2 d-flex">
+            <button type="submit" name="update" value="1" class="ms-auto btn btn-primary">
+                <i class="ti ti-device-floppy"></i>
+                <span>{{ _x('button', 'Save') }}</span>
+            </button>
+        </div>
+    </form>
+{% endif %}
+{{ call('Html::script', ['/plugins/transferticketentity/js/ticketTransfer.js']) | raw }}
+{{ call('Html::css', ['/plugins/transferticketentity/css/style.css']) | raw }}
+<div id="transferticketentity_dialog" style="display: none;">
+    <p>{{ __("Once the transfer has been completed, the ticket will remain visible only if you have the required rights.", "transferticketentity") }}</p>
+    <div class='tte_justification'>
+        <label for='tte_justification'>{{ __("Please explain your transfer", "transferticketentity") }}</label>
+        <textarea id='tte_justification' name='tte_justification'></textarea>
+    </div>
+    <p id='tte_adv-msg'>{{ __("Warning, category will be reset if it does not exist in the target entity.", "transferticketentity") }}</p>
+</div>

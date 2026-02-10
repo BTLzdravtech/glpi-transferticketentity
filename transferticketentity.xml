@@ -23,8 +23,8 @@
       </authors>
       <versions>
          <version>
-            <num>1.1.3</num>
-            <compatibility>~10.0.0</compatibility>
+            <num>1.2.0</num>
+            <compatibility>~11.0.0</compatibility>
          </version>
       </versions>
       <langs>

@@ -29,6 +29,8 @@
  --------------------------------------------------------------------------
 */
 
+use GlpiPlugin\Transferticketentity\Profile;
+
 /**
  * Install hook
  *
@@ -37,8 +39,6 @@
 function plugin_transferticketentity_install()
 {
     global $DB;
-
-    PluginTransferticketentityProfile::createFirstAccess($_SESSION["glpiactiveprofile"]["id"]);
 
     $default_charset = DBConnection::getDefaultCharset();
     $default_collation = DBConnection::getDefaultCollation();
@@ -58,9 +58,17 @@ function plugin_transferticketentity_install()
             FOREIGN KEY  (`itilcategories_id`) REFERENCES `glpi_itilcategories` (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;";
 
-        $DB->query($query) or die("error creating glpi_plugin_transferticketentity_entities_settings " . $DB->error());
+        $DB->doQuery($query);
     }
-    
+
+    $migration = new Migration(TRANSFERTICKETENTITY_VERSION);
+
+    foreach (Profile::getAllRights() as $right) {
+        $migration->addRight($right['field'], key($right['rights']), [Config::$rightname => UPDATE]);
+    }
+
+    $migration->executeMigration();
+
     return true;
 }
 
@@ -73,28 +81,9 @@ function plugin_transferticketentity_uninstall()
 {
     global $DB;
 
-    $result = $DB->request([
-        'SELECT' => ['profiles_id'],
-        'FROM' => 'glpi_profilerights',
-        'WHERE' => ['name' => 'plugin_transferticketentity_use', 'rights' => ALLSTANDARDRIGHT]
-    ]);
+    ProfileRight::deleteProfileRights(array_map(fn($right) => $right['field'], Profile::getAllRights()));
 
-    foreach ($result as $id_profil) {
-        $DB->delete('glpi_profilerights', 
-            [
-                'name' => 'plugin_transferticketentity_use',
-                'profiles_id' => $id_profil
-            ]
-        );
-    }
-
-    $tables = ["glpi_plugin_transferticketentity_entities_settings"];
-
-    foreach ($tables as $table) {
-        if ($DB->tableExists($table)) {
-            $DB->queryOrDie("DROP TABLE IF EXISTS `".$table."`", $DB->error());
-        }
-    }
+    $DB->dropTable('glpi_plugin_transferticketentity_entities_settings', true);
 
     return true;
 }
