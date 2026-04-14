@@ -73,7 +73,7 @@ class Profile extends CommonDBTM
     {
         if ($item instanceof GlpiProfile
             && $item->getField('id')) {
-            return self::createTabEntry(__s("Transfer Ticket Entity", "transferticketentity"));
+            return self::createTabEntry(__("Transfer Ticket Entity", "transferticketentity"));
         }
 
         return '';
