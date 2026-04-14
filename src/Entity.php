@@ -58,7 +58,7 @@ class Entity extends CommonDBTM
     {
         if ($item instanceof GlpiEntity
             && $item->getField('id') != NOT_AVAILABLE) {
-            return self::createTabEntry(__s("Transfer Ticket Entity", "transferticketentity"));
+            return self::createTabEntry(__("Transfer Ticket Entity", "transferticketentity"));
         }
         return '';
     }
