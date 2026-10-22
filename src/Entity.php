@@ -164,7 +164,7 @@ class Entity extends CommonDBTM
         TemplateRenderer::getInstance()->display('@transferticketentity/entity.html.twig', [
             'item' => $entity,
             'form_path' => self::getFormURL(),
-            'canedit' => Session::haveRightsOr(GlpiEntity::$rightname, [CREATE, UPDATE, PURGE]),
+            'canedit' => $entity->can($entity_id, UPDATE),
             'checkRights' => $checkRights,
             'availableCategories' => $availableCategories,
         ]);

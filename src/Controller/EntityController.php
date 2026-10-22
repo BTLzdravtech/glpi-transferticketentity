@@ -18,20 +18,20 @@ final class EntityController extends AbstractController
     {
         global $DB;
 
-        Session::haveRightsOr(GlpiEntity::$rightname, [CREATE, UPDATE, PURGE]);
-
-        $entity_id = $_POST['entity_id'];
+        $entity_id = $request->request->getInt('entity_id', -1);
         $entity = new GlpiEntity();
-        $entity->getFromDB($entity_id);
+        $entity->check($entity_id, UPDATE);
+
+        $itilcategories_id = $request->request->getInt('itilcategories_id');
 
         $DB->updateOrInsert(
             'glpi_plugin_transferticketentity_entities_settings',
             [
-                'allow_entity_only_transfer' => $_POST['allow_entity_only_transfer'],
-                'justification_transfer' => $_POST['justification_transfer'],
-                'allow_transfer' => $_POST['allow_transfer'],
-                'keep_category' => $_POST['keep_category'],
-                'itilcategories_id' => $_POST['itilcategories_id'] == 0 ? null : $_POST['itilcategories_id'],
+                'allow_entity_only_transfer' => $request->request->getBoolean('allow_entity_only_transfer'),
+                'justification_transfer' => $request->request->getBoolean('justification_transfer'),
+                'allow_transfer' => $request->request->getBoolean('allow_transfer'),
+                'keep_category' => $request->request->getBoolean('keep_category'),
+                'itilcategories_id' => $itilcategories_id > 0 ? $itilcategories_id : null,
             ],
             [
                 'entities_id' => $entity_id,

@@ -33,7 +33,9 @@ use GlpiPlugin\Transferticketentity\Entity as TransferTicketEntityEntity;
 use GlpiPlugin\Transferticketentity\Profile as TransferTicketEntityProfile;
 use GlpiPlugin\Transferticketentity\Ticket as TransferTicketEntityTicket;
 
-define('TRANSFERTICKETENTITY_VERSION', '1.1.3');
+define('PLUGIN_TRANSFERTICKETENTITY_VERSION', '1.1.4');
+define('PLUGIN_TRANSFERTICKETENTITY_MIN_GLPI', '11.0.0');
+define('PLUGIN_TRANSFERTICKETENTITY_MAX_GLPI', '11.0.99');
 
 function plugin_init_transferticketentity()
 {
@@ -51,13 +53,14 @@ function plugin_version_transferticketentity()
 {
     return [
         'name'           => 'TransferTicketEntity',
-        'version'        => TRANSFERTICKETENTITY_VERSION,
+        'version'        => PLUGIN_TRANSFERTICKETENTITY_VERSION,
         'author'         => 'Yannick COMBA',
         'license'        => 'GPLv3+',
         'homepage'       => 'https://github.com/departement-maine-et-loire/',
         'requirements'   => [
             'glpi'   => [
-                'min' => '10.0',
+                'min' => PLUGIN_TRANSFERTICKETENTITY_MIN_GLPI,
+                'max' => PLUGIN_TRANSFERTICKETENTITY_MAX_GLPI,
             ],
         ],
     ];

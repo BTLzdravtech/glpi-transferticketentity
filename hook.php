@@ -54,14 +54,24 @@ function plugin_transferticketentity_install()
             `keep_category` BOOLEAN NOT NULL DEFAULT 0,
             `itilcategories_id` INT {$default_key_sign},
             PRIMARY KEY  (`id`),
-            FOREIGN KEY  (`entities_id`) REFERENCES `glpi_entities` (`id`),
-            FOREIGN KEY  (`itilcategories_id`) REFERENCES `glpi_itilcategories` (`id`)
+            KEY `entities_id` (`entities_id`),
+            KEY `itilcategories_id` (`itilcategories_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;";
 
         $DB->doQuery($query);
     }
 
-    $migration = new Migration(TRANSFERTICKETENTITY_VERSION);
+    $migration = new Migration(PLUGIN_TRANSFERTICKETENTITY_VERSION);
+
+    // GLPI does not use foreign keys, they were preventing entities and categories deletion
+    $migration->dropForeignKeyContraint(
+        'glpi_plugin_transferticketentity_entities_settings',
+        'glpi_plugin_transferticketentity_entities_settings_ibfk_1'
+    );
+    $migration->dropForeignKeyContraint(
+        'glpi_plugin_transferticketentity_entities_settings',
+        'glpi_plugin_transferticketentity_entities_settings_ibfk_2'
+    );
 
     foreach (Profile::getAllRights() as $right) {
         $migration->addRight($right['field'], key($right['rights']), [Config::$rightname => UPDATE]);

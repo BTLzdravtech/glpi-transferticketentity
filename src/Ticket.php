@@ -58,7 +58,8 @@ class Ticket extends CommonDBTM
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         if ($item instanceof GlpiTicket
-            && $item->getField('id')) {
+            && $item->getField('id')
+            && Session::haveRight('plugin_transferticketentity_use', ALLSTANDARDRIGHT)) {
             return self::createTabEntry(__s("Transfer Ticket Entity", "transferticketentity"));
         }
 
