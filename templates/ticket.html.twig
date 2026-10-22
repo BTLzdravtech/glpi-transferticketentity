@@ -6,12 +6,11 @@
           method="post"
           data-track-changes="true"
           id="tte_form">
-        <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
 {% endif %}
 
 <div class="row">
-    {{ fields.hiddenField('ticket_id', item.fields['id'], '') }}
-    {{ fields.hiddenField('justification', '', '') }}
+    {{ fields.hiddenField('ticket_id', item.fields['id']) }}
+    {{ fields.hiddenField('justification', '') }}
     {{ fields.dropdownArrayField('entity_choice', null, entityDropdownValues, __("Select ticket entity to transfer", "transferticketentity"), {
         'full_width': true,
         'on_change': 'tteGetEntityGroups(this)'

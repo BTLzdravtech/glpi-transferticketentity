@@ -33,9 +33,9 @@ use GlpiPlugin\Transferticketentity\Entity as TransferTicketEntityEntity;
 use GlpiPlugin\Transferticketentity\Profile as TransferTicketEntityProfile;
 use GlpiPlugin\Transferticketentity\Ticket as TransferTicketEntityTicket;
 
-define('PLUGIN_TRANSFERTICKETENTITY_VERSION', '1.1.4');
-define('PLUGIN_TRANSFERTICKETENTITY_MIN_GLPI', '11.0.0');
-define('PLUGIN_TRANSFERTICKETENTITY_MAX_GLPI', '11.0.99');
+define('PLUGIN_TRANSFERTICKETENTITY_VERSION', '2.0.0');
+define('PLUGIN_TRANSFERTICKETENTITY_MIN_GLPI', '12.0.0');
+define('PLUGIN_TRANSFERTICKETENTITY_MAX_GLPI', '12.0.99');
 
 function plugin_init_transferticketentity()
 {
@@ -45,8 +45,6 @@ function plugin_init_transferticketentity()
     Plugin::registerClass(TransferTicketEntityProfile::class, ['addtabon' => 'Profile']);
     Plugin::registerClass(TransferTicketEntityTicket::class, ['addtabon' => 'Ticket']);
     Plugin::registerClass(TransferTicketEntityEntity::class, ['addtabon' => 'Entity']);
-
-    $PLUGIN_HOOKS['csrf_compliant']['transferticketentity'] = true;
 }
 
 function plugin_version_transferticketentity()

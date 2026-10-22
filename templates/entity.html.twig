@@ -6,12 +6,11 @@
       action="{{ form_path }}"
       method="post"
       data-track-changes="true">
-    <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
     {% endif %}
 
     <div class="row">
         {{ fields.smallTitle(__("Settings Transfer Ticket Entity", "transferticketentity")) }}
-        {{ fields.hiddenField('entity_id', item.getID(), '') }}
+        {{ fields.hiddenField('entity_id', item.getID()) }}
         {{ fields.dropdownYesNo('allow_transfer', checkRights['allow_transfer'], __('Allow Transfer function', 'transferticketentity'),
             {
                 'full_width': true
