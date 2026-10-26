@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: GLPI Plugin - Transfer Ticket Entity\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-24 09:03+0000\n"
-"PO-Revision-Date: 2024-02-22 15:22-0300\n"
+"PO-Revision-Date: 2026-10-26 13:04-0300\n"
 "Last-Translator: Yannick Comba, 2022,2023\n"
 "Language-Team: Portuguese (Brasil)\n"
 "Language: pt_BR\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: inc/profile.class.php:74 inc/ticket.class.php:48
 msgid "Transfer Ticket Entity"
-msgstr "Transferência de Entidade do Ticket"
+msgstr "Transferência de chamados entre entidades"
 
 #: inc/profile.class.php:74
 msgid "Change rights"
@@ -51,7 +51,7 @@ msgstr "Se o problema persistir, você pode tentar esvaziar o cache através das
 
 #: inc/ticket.class.php:216
 msgid "Select ticket entity to transfer"
-msgstr "Select ticket entity to transfer"
+msgstr "Selecione a entidade para a qual transferir o chamado"
 
 #: inc/ticket.class.php:218
 msgid "Choose your entity"
@@ -116,3 +116,39 @@ msgstr "Por favor apresentar mais dados sobre sua transferência"
 #: inc/ticket.php:266
 msgid "You must be assigned to the ticket to be able to transfer it"
 msgstr "Você precisa estar atribuído ao ticket para ser capaz de transferi-lo"
+
+#: src/Profile.php
+msgid "Authorized entity transfer"
+msgstr "Autorizar transferência de chamados entre entidades"
+
+#: src/Profile.php
+msgid "Transfer authorized without assignment of technician or associated group"
+msgstr "Autorizar transferência sem atribuir a um técnico ou grupo"
+
+#: src/Profile.php
+msgid "Active"
+msgstr "Ativo"
+
+#: templates/entity.html.twig
+msgid "Settings Transfer Ticket Entity"
+msgstr "Configurações da transferência de chamados entre entidades"
+
+#: templates/entity.html.twig
+msgid "Allow Transfer function"
+msgstr "Permitir transferência de chamados"
+
+#: templates/entity.html.twig
+msgid "Assigned group required"
+msgstr "Exigir atribuição a um grupo"
+
+#: templates/entity.html.twig
+msgid "Justification required"
+msgstr "Exigir justificativa"
+
+#: templates/entity.html.twig
+msgid "Keep category after transfer"
+msgstr "Manter a categoria após a transferência"
+
+#: templates/entity.html.twig
+msgid "Default category"
+msgstr "Categoria padrão"
