@@ -39,7 +39,17 @@ Les prérequis du transfert se gèrent dans l'administration des entités.
 
 ## Compatibilité
 
-Ce plugin a été testé jusqu'à la version de GLPI 10.0.14
+| Plugin | GLPI | Branche |
+|---|---|---|
+| 2.x | 12.0 | `master` |
+| 1.1.x | 11.0 | [`glpi-11`](../../tree/glpi-11) |
+
+Le dossier du plugin doit s'appeler `transferticketentity` :
+
+```
+git clone https://github.com/BTLzdravtech/glpi-transferticketentity.git transferticketentity
+# GLPI 11 : git clone -b glpi-11 https://github.com/BTLzdravtech/glpi-transferticketentity.git transferticketentity
+```
 
 # GLPi Transfer Ticket Entity Plugin (EN)
 
@@ -82,4 +92,14 @@ The transfer prerequisites are managed in the entity administration.
 
 ## Compatibility
 
-This plugin has been tested up to GLPI version 10.0.14
+| Plugin | GLPI | Branch |
+|---|---|---|
+| 2.x | 12.0 | `master` |
+| 1.1.x | 11.0 | [`glpi-11`](../../tree/glpi-11) |
+
+The plugin directory must be named `transferticketentity`:
+
+```
+git clone https://github.com/BTLzdravtech/glpi-transferticketentity.git transferticketentity
+# GLPI 11: git clone -b glpi-11 https://github.com/BTLzdravtech/glpi-transferticketentity.git transferticketentity
+```
